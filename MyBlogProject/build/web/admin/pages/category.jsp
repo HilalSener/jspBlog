@@ -297,7 +297,7 @@
                                 <!-- <form role="form" action="addCategory.jsp" method="post"> -->
                                 <%
                                     DB db = new DB();
-                                    ResultSet rs = db.execute("select category_id, category from category");
+                                    ResultSet rs = db.execute("select category_id, category from category order by category_id");
                                 %>
                                 <table id="mytable" class="table table-bordred table-striped">
                                     <thead>
@@ -307,11 +307,11 @@
                                     <tbody>
                                         <% while (rs.next()) {%>
                                         <tr>
-                                            <td><%=rs.getString(1)%></td>
-                                            <td><%=rs.getString(2)%></td>
+                                            <td><input type="text" id="category_id" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rs.getString(1)%>"></td>
+                                            <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rs.getString(2)%>"></td>
                                             <td>&emsp;&emsp;&emsp;</td>
                                             <td>&emsp;&emsp;&emsp;</td>
-                                            <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                                            <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" onclick="copyCategory()"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
                                             <td><p data-placement="top" data-toggle="tooltip" title="Delete"><a href="deleteCategory.jsp?cat=<%=rs.getString(2)%>" class="btn btn-danger btn-xs" data-title="Delete"><span class="glyphicon glyphicon-trash"></span></a></p></td>
                                         </tr>
                                         <% }%>
@@ -342,14 +342,20 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                         <h4 class="modal-title custom_align" id="Heading">Edit Your Category</h4>
                     </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input class="form-control " name="myInput" type="text" placeholder="Category">
+                    <form action="updateCategory.jsp" method="get">
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <input class="form-control" type="text" id="category_id2" name="cat_id">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control " type="text" placeholder="Category" name="cat">
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer ">
-                        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
-                    </div>
+                        <div class="modal-footer ">
+                            <button type="submit" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button> 
+                        </div>
+                    </form>
                 </div>
                 <!-- /.modal-content --> 
             </div>
@@ -357,9 +363,11 @@
         </div>
 
         <script>
-            $('#edit').on('shown.bs.modal', function () {
-                $('#myInput').focus();
-            });
+            function copyCategory()
+            {
+                document.getElementById("category_id2").value = document.getElementById("category_id").value;
+                //alert(document.getElementById("category_id").value);
+            }
         </script>
 
         <!-- jQuery -->

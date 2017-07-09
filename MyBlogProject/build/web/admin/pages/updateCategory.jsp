@@ -11,7 +11,7 @@
     
     update = String.format(update, cat);
     
-    //response.sendRedirect("category.jsp");
+    response.sendRedirect("category.jsp");
     
     db.query(update);
 %>

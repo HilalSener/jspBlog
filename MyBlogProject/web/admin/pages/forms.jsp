@@ -300,7 +300,7 @@
                                         </div>
                                         <%
                                             DB db = new DB();
-                                            ResultSet rs = db.execute("select category_id, category from category");
+                                            ResultSet rs = db.execute("select category_id, category from category order by category_id");
                                         %>
                                         <div class="form-group">
                                             <label>Category</label>
