@@ -34,7 +34,7 @@
             } catch (Exception e) {
             }
             
-            ResultSet rsPostsByCategory = db.execute("select * from post where category_id ='"+ category +"'");
+            ResultSet rsPostsByCategory = db.execute("select * from post where category_id ='"+ category +"' order by category_id limit 0, 5");
             
             rsPostsByCategory.next();
         %>

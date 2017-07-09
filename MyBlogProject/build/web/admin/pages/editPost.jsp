@@ -1,3 +1,6 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="blog.source.DB"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -253,22 +256,14 @@
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
-                            <li class="sidebar-search">
-                                <div class="input-group custom-search-form">
-                                    <input type="text" class="form-control" placeholder="Search...">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                                <!-- /input-group -->
-                            </li>
                             <li>
                                 <a href="forms.jsp"><i class="fa fa-edit fa-fw"></i> Add Post</a>
                             </li>
                             <li>
-                                <a href="category.jsp"><i class="fa fa-edit fa-fw"></i> Add Category</a>
+                                <a href="editPost.jsp"><i class="fa fa-edit fa-fw"></i> Edit Post</a>
+                            </li>
+                            <li>
+                                <a href="category.jsp"><i class="fa fa-edit fa-fw"></i> Category</a>
                             </li>
                         </ul>
                     </div>
@@ -278,10 +273,80 @@
             </nav>
 
             <div id="page-wrapper">
-                
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">Create Your Blog Post</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel-body">
+                            <div class="row">
+                               <div class="col-lg-12">
+                                    <%
+                                        DB db = new DB();
+                                        ResultSet rsPost = db.execute("select * from post order by post_id");
+                                    %>
+                                    <table id="mytable" class="table table-bordred table-striped" style="width: 100%">
+                                        <thead>
+                                        <th>Title</th>
+                                        <th>Date</th>
+                                        <th>Image</th>
+                                        <th>Post</th>
+                                        </thead>
+                                        <tbody>
+                                            <% while (rsPost.next()) {%>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(2)%>" readonly></td>
+                                                <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(4)%>" readonly></td>
+                                                <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(5)%>" readonly></td>
+                                                <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(6)%>" readonly></td>
+                                                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" onclick="copyCategory()"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                                                <td><p data-placement="top" data-toggle="tooltip" title="Delete"><a href="deletePost.jsp?del=<%=rsPost.getString(2)%>" class="btn btn-danger btn-xs" data-title="Delete"><span class="glyphicon glyphicon-trash"></span></a></p></td>
+                                            </tr>
+                                            <% }%>
+                                    </table>
+                                </div> 
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
             </div>
             <!-- /#page-wrapper -->
 
+            <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">Edit Your Category</h4>
+                    </div>
+                    <form action="updateCategory.jsp" method="get">
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <input class="form-control" type="text" id="category_id2" name="cat_id">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control " type="text" placeholder="Category" name="cat">
+                            </div>
+                        </div>
+                        <div class="modal-footer ">
+                            <button type="submit" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button> 
+                        </div>
+                    </form>
+                </div>
+                <!-- /.modal-content --> 
+            </div>
+            <!-- /.modal-dialog --> 
+        </div>
+            
         </div>
         <!-- /#wrapper -->
 

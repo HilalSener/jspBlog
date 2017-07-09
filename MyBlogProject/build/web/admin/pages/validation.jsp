@@ -20,7 +20,7 @@
         if(rs.next())   
         {
             //out.println("Valid login credentials");        
-            response.sendRedirect("index.html");
+            response.sendRedirect("forms.jsp");
         }
         else
            out.println("Invalid login credentials");            
