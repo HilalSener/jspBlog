@@ -123,7 +123,7 @@
                     <%
                         //String cat = "select category from category";
                         ResultSet cat = db.execute("select category from category order by category asc");
-                        cat.next();
+                        //cat.next();
                     %>
                     <!-- Follow Me-->
                     <div class="well">

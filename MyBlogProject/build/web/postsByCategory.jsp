@@ -36,7 +36,7 @@
             
             ResultSet rsPostsByCategory = db.execute("select * from post where category_id ='"+ category +"' order by category_id limit 0, 5");
             
-            rsPostsByCategory.next();
+            //rsPostsByCategory.next();
         %>
 
         <!-- Navigation -->
@@ -130,7 +130,7 @@
                     <%
                         //String cat = "select category from category";
                         ResultSet cat = db.execute("select category_id, category from category order by category asc");
-                        cat.next();
+                        //cat.next();
                     %>
                     <!-- Follow Me-->
                     <div class="well">

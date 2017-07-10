@@ -303,7 +303,7 @@
                                             <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rs.getString(2)%>"></td>
                                             <td>&emsp;&emsp;&emsp;</td>
                                             <td>&emsp;&emsp;&emsp;</td>
-                                            <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" onclick="copyCategory()"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                                            <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn_edit btn btn-primary btn-xs" rec_id="<%=rs.getString(1)%>" data-title="Edit" data-toggle="modal" data-target="#edit" onclick="copyCategory()"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
                                             <td><p data-placement="top" data-toggle="tooltip" title="Delete"><a href="deleteCategory.jsp?cat=<%=rs.getString(2)%>" class="btn btn-danger btn-xs" data-title="Delete"><span class="glyphicon glyphicon-trash"></span></a></p></td>
                                         </tr>
                                         <% }%>
@@ -355,9 +355,16 @@
         </div>
 
         <script>
+            $(".btn_edit").click(function()
+            {
+               var id = $(this).attr('rec_id');
+               alert('Secilen : '+id);
+               $("#category_id2").val(id);
+               
+            });
             function copyCategory()
             {
-                document.getElementById("category_id2").value = document.getElementById("category_id").value;
+                //document.getElementById("category_id2").value = document.getElementById("category_id").value;
                 //alert(document.getElementById("category_id").value);
             }
         </script>
