@@ -9,6 +9,8 @@
 <%
     try
     {
+        request.setCharacterEncoding("UTF-8");
+         
         DB db = new DB();
         String uname = request.getParameter("uname");
         String password = request.getParameter("password");
@@ -19,8 +21,12 @@
         ResultSet rs = pst.executeQuery();                        
         if(rs.next())   
         {
-            //out.println("Valid login credentials");        
-            response.sendRedirect("forms.jsp");
+            //out.println("Valid login credentials");  
+            session.setAttribute("username", rs.getString(1));
+            
+            //response.sendRedirect("forms.jsp");
+            
+            out.println("welcome");
         }
         else
            out.println("Invalid login credentials");            

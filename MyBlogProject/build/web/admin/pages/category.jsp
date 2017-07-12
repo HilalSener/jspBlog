@@ -1,3 +1,14 @@
+<%
+    //Eğer bağlana istemci için username bilgisi yoksa
+    if(session.getAttribute("username") == null)
+    {
+        //session u yok et
+        session.invalidate();
+        //kullanıcıyı login.jsp ye yönlendir
+        response.sendRedirect("login.jsp");
+        return;
+    }
+%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="blog.source.DB"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

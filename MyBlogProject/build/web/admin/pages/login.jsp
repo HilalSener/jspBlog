@@ -9,6 +9,9 @@
         <meta name="author" content="">
 
         <title>Admin Login</title>
+        
+        <!-- JQUERY -->
+        <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
 
         <!-- Bootstrap Core CSS -->
         <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -33,7 +36,7 @@
                             <h3 class="panel-title">Please Sign In</h3>
                         </div>
                         <div class="panel-body">
-                            <form role="form" action="validation.jsp" method="post">
+                            <form id="loginForm" >
                                 <fieldset>
                                     <div class="form-group">
                                         <input required class="form-control" placeholder="Username" name="uname" type="text" autofocus>
@@ -41,6 +44,7 @@
                                     <div class="form-group">
                                         <input required class="form-control" placeholder="Password" name="password" type="password" value="">
                                     </div>
+                                    <div id="mesaj" class="alert alert-danger" role="alert" style="display:none"></div><br/>
                                     <!-- Change this to a button or input when using this as a form -->
                                     <input type="submit" value="Login" class="btn btn-lg btn-success btn-block"/>
                                 </fieldset>
@@ -50,6 +54,32 @@
                 </div>
             </div>
         </div>
+        
+        <script>
+            $("#loginForm").submit(function(e)
+            {
+                e.preventDefault();
+                
+                var degerler = $(this).serialize();
+                //alert(degerler);
+                
+                $.post("validation.jsp", degerler, function(data, state)
+                {
+                    var gelen = $.trim(data);
+                    if(gelen == "welcome")
+                    {
+                        location.href = "forms.jsp";
+                    }
+                    else
+                    {
+                        $("#mesaj").html("<center><b>Giriş Bilgileri Hatalı</b></center>");
+                        $("#mesaj").slideDown(500);
+                    }
+                });
+                
+                return false;
+            });
+        </script>
 
         <!-- jQuery -->
         <script src="../vendor/jquery/jquery.min.js"></script>
