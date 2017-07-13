@@ -102,7 +102,7 @@
                         <hr>
                         <img class="img-responsive" src="<%=rsPost.getString(5)%>" alt="">
                         <hr>
-                        <p><%=rsPost.getString(6)%></p>
+                        <input type="text" maxlength="10" style="border: none;background-color: transparent;box-shadow: none;" value="<%=rsPost.getString(6)%>" readonly /><br/><br/>
                         <a href="post.jsp?title=<%=rsPost.getString(2)%>" class="btn btn-primary" target="_blank">Read More <span class="glyphicon glyphicon-chevron-right"></span></a> 
                         <!-- <button type="submit" class="btn btn-primary">Read More <span class="glyphicon glyphicon-chevron-right"></span></button> -->
                     </form>
