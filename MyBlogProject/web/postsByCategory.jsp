@@ -93,7 +93,7 @@
                         <hr>
                         <img class="img-responsive" src="<%=rsPostsByCategory.getString(5)%>" alt="">
                         <hr>
-                        <p><%=rsPostsByCategory.getString(6)%></p>
+                        <textarea rows="10" cols="30" style="border: none;background-color: transparent;resize: none;outline: none;width: 100%;height:80px;overflow:hidden;resize:none" readonly><%=rsPostsByCategory.getString(6)%></textarea> 
                         <a href="post.jsp?title=<%=rsPostsByCategory.getString(2)%>" class="btn btn-primary" target="_blank">Read More <span class="glyphicon glyphicon-chevron-right"></span></a> 
                     </form>
                     <hr>
@@ -128,9 +128,8 @@
                     </div>
 
                     <%
-                        //String cat = "select category from category";
+                        //Kategoriler alfabetik sıraya göre getir
                         ResultSet cat = db.execute("select category_id, category from category order by category asc");
-                        //cat.next();
                     %>
                     <!-- Follow Me-->
                     <div class="well">

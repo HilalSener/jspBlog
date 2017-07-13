@@ -137,9 +137,8 @@
                     </div>
 
                     <%
-                        //String cat = "select category from category";
-                        ResultSet cat = db.execute("select category from category order by category asc");
-                        //cat.next();
+                        //Kategoriler alfabetik sıraya göre getir
+                        ResultSet cat = db.execute("select category_id, category from category order by category asc");
                     %>
                     <!-- Follow Me-->
                     <div class="well">
@@ -149,7 +148,7 @@
                             <ul class="nav" role="tablist">
                                 <% while (cat.next()) {%>
                                 <li>
-                                    <a href="#"><%=cat.getString(1)%></a>
+                                    <a href="postsByCategory.jsp?category=<%=cat.getString(1)%>"><%=cat.getString(2)%></a>
                                 </li>
                                 <% }%>
                             </ul>
@@ -196,10 +195,13 @@
         <!-- /.container -->
 
         <script>
+            //Döküman yüklendiğinde yorum alanını gizle
             $(document).ready(function () {
                 $("#yorum").hide();
+                //Hidden field tan yorum yapabilme durumunu al
                 var comment = $("#comment_enabled").val();
                 //alert(comment);
+                //Durum 1 ise yorum alanını göster değilse gizle
                 if(comment == 1)
                     $("#yorum").show();
                 else
