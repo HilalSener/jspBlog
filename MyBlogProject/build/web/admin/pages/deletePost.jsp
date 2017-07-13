@@ -9,7 +9,7 @@
     
     delete = String.format(delete, del);
     
-    esponse.sendRedirect("editPost.jsp");
+    response.sendRedirect("editPost.jsp");
     
     db.query(delete);
 %>

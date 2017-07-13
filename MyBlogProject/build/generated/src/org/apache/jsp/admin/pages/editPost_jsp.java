@@ -346,12 +346,6 @@ public final class editPost_jsp extends org.apache.jasper.runtime.HttpJspBase
 
                                         DB db = new DB();
                                         ResultSet rsPost = db.execute("select * from post order by post_id");
-                                        rsPost.getRowId("comments_enabled");
-                                        String comment = rsPost.getString(7);
-                                        if(comment == "1")
-                                            comment = "Yes";
-                                        else
-                                            comment = "No";
                                     
       out.write("\n");
       out.write("                                    <table id=\"mytable\" class=\"table table-bordred table-striped\" style=\"width: 100%\">\n");

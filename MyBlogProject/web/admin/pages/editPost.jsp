@@ -1,7 +1,6 @@
 <%
     //Eğer bağlana istemci için username bilgisi yoksa
-    if(session.getAttribute("username") == null)
-    {
+    if (session.getAttribute("username") == null) {
         //session u yok et
         session.invalidate();
         //kullanıcıyı login.jsp ye yönlendir
@@ -35,11 +34,13 @@
         <!-- Custom Fonts -->
         <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     </head>
 
     <body>
-
-        <div id="wrapper">
+        <div id="container">
 
             <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -286,68 +287,77 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Create Your Blog Post</h1>
+                        <h1 class="page-header">Edit Your Blog Post</h1>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="panel-body">
-                            <div class="row">
-                               <div class="col-lg-12">
-                                    <%
-                                        DB db = new DB();
-                                        ResultSet rsPost = db.execute("select * from post order by post_id");
-                                    %>
-                                    <table id="mytable" class="table table-bordred table-striped" style="width: 100%">
-                                        <thead>
-                                        <th>Title</th>
-                                        <th>Date</th>
-                                        <th>Image</th>
-                                        <th>Post</th>
-                                        <th>Comments</th>
-                                        </thead>
-                                        <tbody>
-                                            <% while (rsPost.next()) {%>
-                                            <tr>
-                                                <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(2)%>" readonly></td>
-                                                <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(4)%>" readonly></td>
-                                                <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(5)%>" readonly></td>
-                                                <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(6)%>" readonly></td>
-                                                <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(7)%>" readonly></td>
-                                                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" onclick="copyCategory()"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                                <td><p data-placement="top" data-toggle="tooltip" title="Delete"><a href="deletePost.jsp?del=<%=rsPost.getString(2)%>" class="btn btn-danger btn-xs" data-title="Delete"><span class="glyphicon glyphicon-trash"></span></a></p></td>
-                                            </tr>
-                                            <% }%>
-                                    </table>
-                                </div> 
-                            </div>
-                            <!-- /.row (nested) -->
+                        <div class="row">
+                            <%
+                                DB db = new DB();
+                                ResultSet rsPost = db.execute("select * from post order by post_id");
+                            %>
+                            <table id="mytable" class="table table-bordred table-striped" style="width: 100%">
+                                <thead>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th>Image</th>
+                                <th>Post</th>
+                                <th>Comments</th>
+                                </thead>
+                                <tbody>
+                                    <% while (rsPost.next()) {%>
+                                    <tr>
+                                        <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(2)%>" readonly></td>
+                                        <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(4)%>" readonly></td>
+                                        <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(5)%>" readonly></td>
+                                        <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(6)%>" readonly></td>
+                                        <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(7)%>" readonly></td>
+                                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn_edit btn btn-primary btn-xs" rec_id="<%=rsPost.getString(1)%>" data-title="Edit" data-toggle="modal" data-target="#edit" onclick="copyCategory()"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                                        <td><p data-placement="top" data-toggle="tooltip" title="Delete"><a href="deletePost.jsp?del=<%=rsPost.getString(2)%>" class="btn btn-danger btn-xs" data-title="Delete"><span class="glyphicon glyphicon-trash"></span></a></p></td>
+                                    </tr>
+                                    <% }%>
+                            </table>
                         </div>
-                        <!-- /.panel -->
+                        <!-- /.row (nested) -->
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /.row -->
             </div>
             <!-- /#page-wrapper -->
+        </div>
+        <!-- /#wrapper -->
 
-            <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                         <h4 class="modal-title custom_align" id="Heading">Edit Your Category</h4>
                     </div>
-                    <form action="updateCategory.jsp" method="get">
+                    <form action="updatePost.jsp" method="get">
                         <div class="modal-body">
-
                             <div class="form-group">
-                                <input class="form-control" type="text" id="category_id2" name="cat_id">
+                                <input class="form-control" type="text" id="category_id2" name="post_id" readonly>
                             </div>
                             <div class="form-group">
-                                <input class="form-control " type="text" placeholder="Category" name="cat">
+                                <input class="form-control " type="text" placeholder="Title" name="title">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control " type="text" placeholder="Image Url" name="imgUrl">
+                            </div>
+                            <div class="form-group">
+                                <textarea required class="form-control" placeholder="Blog Post" name="pText" rows="10"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="cEnabled" value="">Enabled comments
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer ">
@@ -359,9 +369,21 @@
             </div>
             <!-- /.modal-dialog --> 
         </div>
-            
-        </div>
-        <!-- /#wrapper -->
+
+        <script>
+            $(".btn_edit").click(function ()
+            {
+                var id = $(this).attr('rec_id');
+                //alert('Secilen : '+id);
+                $("#category_id2").val(id);
+
+            });
+            function copyCategory()
+            {
+                //document.getElementById("category_id2").value = document.getElementById("category_id").value;
+                //alert(document.getElementById("category_id").value);
+            }
+        </script>
 
         <!-- jQuery -->
         <script src="../vendor/jquery/jquery.min.js"></script>

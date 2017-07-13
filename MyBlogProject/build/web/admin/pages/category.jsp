@@ -347,9 +347,8 @@
                     </div>
                     <form action="updateCategory.jsp" method="get">
                         <div class="modal-body">
-
                             <div class="form-group">
-                                <input class="form-control" type="text" id="category_id2" name="cat_id">
+                                <input class="form-control" type="text" id="category_id2" name="cat_id" readonly>
                             </div>
                             <div class="form-group">
                                 <input class="form-control " type="text" placeholder="Category" name="cat">
@@ -369,7 +368,7 @@
             $(".btn_edit").click(function()
             {
                var id = $(this).attr('rec_id');
-               alert('Secilen : '+id);
+               //alert('Secilen : '+id);
                $("#category_id2").val(id);
                
             });
