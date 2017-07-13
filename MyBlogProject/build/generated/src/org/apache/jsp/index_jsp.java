@@ -121,6 +121,14 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <a href=\"#\">ETKİNLİK</a>\r\n");
       out.write("                        </li>\r\n");
       out.write("                    </ul>\r\n");
+      out.write("                    <form class=\"navbar-form navbar-right\" role=\"search\">\r\n");
+      out.write("                        <div class=\"input-group\" style=\"margin:10px\">\r\n");
+      out.write("                            <input type=\"text\" class=\"form-control\" placeholder=\"Search\" name=\"q\">\r\n");
+      out.write("                            <div class=\"input-group-btn\">\r\n");
+      out.write("                                <button class=\"btn btn-default\" type=\"submit\"><i class=\"glyphicon glyphicon-search\"></i></button>\r\n");
+      out.write("                            </div>\r\n");
+      out.write("                        </div>\r\n");
+      out.write("                    </form>\r\n");
       out.write("                </div>\r\n");
       out.write("                <!-- /.navbar-collapse -->\r\n");
       out.write("            </div>\r\n");
@@ -160,12 +168,15 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.print(rsPost.getString(5));
       out.write("\" alt=\"\">\r\n");
       out.write("                        <hr>\r\n");
-      out.write("                        <input type=\"text\" maxlength=\"10\" style=\"border: none;background-color: transparent;box-shadow: none;\" readonly>");
+      out.write("                        <!-- <input type=\"text\" maxlength=\"100\" style=\"border: none;background-color: transparent;box-shadow: none;width: 100%;\" value=\"");
       out.print(rsPost.getString(6));
-      out.write("/>\r\n");
+      out.write("\" readonly /><br/><br/> -->\r\n");
+      out.write("                        <textarea rows=\"10\" cols=\"30\" style=\"border: none;background-color: transparent;resize: none;outline: none;width: 100%;height:80px;overflow:hidden;resize:none\" readonly>");
+      out.print(rsPost.getString(6));
+      out.write("</textarea> \r\n");
       out.write("                        <a href=\"post.jsp?title=");
       out.print(rsPost.getString(2));
-      out.write("\" class=\"btn btn-primary\" target=\"_blank\">Read More <span class=\"glyphicon glyphicon-chevron-right\"></span></a> \r\n");
+      out.write("\" class=\"btn btn-primary\" target=\"_blank\">Devamını Oku <span class=\"glyphicon glyphicon-chevron-right\"></span></a> \r\n");
       out.write("                        <!-- <button type=\"submit\" class=\"btn btn-primary\">Read More <span class=\"glyphicon glyphicon-chevron-right\"></span></button> -->\r\n");
       out.write("                    </form>\r\n");
       out.write("                    <hr>\r\n");
@@ -249,9 +260,8 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("                    ");
 
-                        //String cat = "select category from category";
+                        //Kategoriler alfabetik sıraya göre getir
                         ResultSet cat = db.execute("select category_id, category from category order by category asc");
-                       // cat.next();
                     
       out.write("\r\n");
       out.write("                    <!-- Follow Me-->\r\n");
