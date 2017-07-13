@@ -1,7 +1,6 @@
 <%
     //Eğer bağlana istemci için username bilgisi yoksa
-    if(session.getAttribute("username") == null)
-    {
+    if (session.getAttribute("username") == null) {
         //session u yok et
         session.invalidate();
         //kullanıcıyı login.jsp ye yönlendir
@@ -57,29 +56,16 @@
                 <!-- /.navbar-header -->
 
                 <ul class="nav navbar-top-links navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-user -->
+                    <li>
+                        <a href="logout.jsp"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     </li>
-                    <!-- /.dropdown -->
                 </ul>
                 <!-- /.navbar-top-links -->
 
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
-                           <li>
+                            <li>
                                 <a href="forms.jsp"><i class="fa fa-edit fa-fw"></i> Add Post</a>
                             </li>
                             <li>
@@ -175,12 +161,12 @@
         </div>
 
         <script>
-            $(".btn_edit").click(function()
+            $(".btn_edit").click(function ()
             {
-               var id = $(this).attr('rec_id');
-               //alert('Secilen : '+id);
-               $("#category_id2").val(id);
-               
+                var id = $(this).attr('rec_id');
+                //alert('Secilen : '+id);
+                $("#category_id2").val(id);
+
             });
             function copyCategory()
             {

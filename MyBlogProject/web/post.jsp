@@ -21,6 +21,8 @@
         <!-- Custom Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Poiret+One|Righteous|Limelight|Marcellus+SC&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     </head>
 
     <body>
@@ -33,8 +35,8 @@
             }
 
             DB db = new DB();
-            
-            ResultSet rsPost = db.execute("select * from post where post_title ='"+ title +"'");
+
+            ResultSet rsPost = db.execute("select * from post where post_title ='" + title + "'");
             rsPost.next();
         %>
 
@@ -77,13 +79,10 @@
                 <a href="#"> Dev Gal
                     <small class="me">Hilal Şener</small></a>
             </h1>
-            
-            <%
-                
-            %>
             <div class="row">
                 <!-- Blog Entries Column -->
                 <div class="col-md-8">
+                    <input id="comment_enabled" type="hidden" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" rec_id="<%=rsPost.getString(7)%>" value="<%=rsPost.getString(7)%>" readonly>
                     <h2>
                         <a href="#"><%=rsPost.getString(2)%></a>
                     </h2>
@@ -91,6 +90,23 @@
                     <hr>
                     <img class="img-responsive" src="<%=rsPost.getString(5)%>" alt=""><br/>
                     <p><%=rsPost.getString(6)%></p>
+                    <hr>
+                    <form id="yorum">
+                        <h4>Yorum Bırak:</h4>
+                        <p class="after"></p>
+                        <div>
+                            <div class="form-group">
+                                <input class="form-control comment-box-name" placeholder="Name"></input>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control comment-box-name" placeholder="E-mail"></input>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control  comment-box-content" rows="3" placeholder="Comment"></textarea>
+                            </div>
+                            <button class="btn btn-primary comment-box-submit-btn">Submit</button>
+                        </div>
+                    </form>
                 </div>
 
                 <!-- Blog Sidebar Widgets Column -->
@@ -179,6 +195,18 @@
         </div>
         <!-- /.container -->
 
+        <script>
+            $(document).ready(function () {
+                $("#yorum").hide();
+                var comment = $("#comment_enabled").val();
+                //alert(comment);
+                if(comment == 1)
+                    $("#yorum").show();
+                else
+                    $("#yorum").hide();
+                return false;
+            });
+        </script>
         <!-- jQuery -->
         <script src="js/jquery.js"></script>
 
