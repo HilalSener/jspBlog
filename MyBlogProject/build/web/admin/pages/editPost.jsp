@@ -115,7 +115,7 @@
                                         <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(8)%>" readonly></td>
                                         <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(9)%>" readonly></td>
                                         <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn_edit btn btn-primary btn-xs" rec_id="<%=rsPost.getString(3)%>" rec_title="<%=rsPost.getString(4)%>" rec_img="<%=rsPost.getString(7)%>" rec_post="<%=rsPost.getString(8)%>" data-title="Edit" data-toggle="modal" data-target="#edit" onclick="copyCategory()"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                                        <td><p data-placement="top" data-toggle="tooltip" title="Delete"><a href="deletePost.jsp?del=<%=rsPost.getString(2)%>" class="btn btn-danger btn-xs" data-title="Delete"><span class="glyphicon glyphicon-trash"></span></a></p></td>
+                                        <td><p data-placement="top" data-toggle="tooltip" title="Delete"><a href="deletePost.jsp?del=<%=rsPost.getString(4)%>" class="btn btn-danger btn-xs" data-title="Delete"><span class="glyphicon glyphicon-trash"></span></a></p></td>
                                     </tr>
                                     <% }%>
                             </table>

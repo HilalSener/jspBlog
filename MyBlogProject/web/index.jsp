@@ -45,7 +45,7 @@
 
             rs.close();
 
-            ResultSet rsPost = db.execute("select * from post limit " + basla + ", " + bitis);
+            ResultSet rsPost = db.execute("select * from category c inner join post p on c.category_id = p.category_id order by p.post_date desc limit " + basla + ", " + bitis);
         %>
 
         <!-- Navigation -->
@@ -104,15 +104,18 @@
                     <!-- First Blog Post -->
                     <form role="form" action="post.jsp" method="get">
                         <h2>
-                            <a href="post.jsp?title=<%=rsPost.getString(2)%>"><%=rsPost.getString(2)%></a>
+                            <a href="post.jsp?title=<%=rsPost.getString(4)%>"><%=rsPost.getString(4)%></a>
                         </h2>
-                        <p><span class="glyphicon glyphicon-time"></span> Posted on <%=rsPost.getString(4)%></p>
+                        <p class="lead">
+                            <a href="index.php"><%=rsPost.getString(2)%></a>
+                        </p>
+                        <p><span class="glyphicon glyphicon-time"></span> Posted on <%=rsPost.getString(6)%></p>
                         <hr>
-                        <img class="img-responsive" src="<%=rsPost.getString(5)%>" alt="">
+                        <img class="img-responsive" src="<%=rsPost.getString(7)%>" alt="">
                         <hr>
                         <!-- <input type="text" maxlength="100" style="border: none;background-color: transparent;box-shadow: none;width: 100%;" value="<%=rsPost.getString(6)%>" readonly /><br/><br/> -->
-                        <textarea rows="10" cols="30" style="border: none;background-color: transparent;resize: none;outline: none;width: 100%;height:80px;overflow:hidden;resize:none" readonly><%=rsPost.getString(6)%></textarea> 
-                        <a href="post.jsp?title=<%=rsPost.getString(2)%>" class="btn btn-primary" target="_blank">Devamını Oku <span class="glyphicon glyphicon-chevron-right"></span></a> 
+                        <textarea rows="10" cols="30" style="border: none;background-color: transparent;resize: none;outline: none;width: 100%;height:80px;overflow:hidden;resize:none" readonly><%=rsPost.getString(8)%></textarea> 
+                        <a href="post.jsp?title=<%=rsPost.getString(4)%>" class="btn btn-primary" target="_blank">Devamını Oku <span class="glyphicon glyphicon-chevron-right"></span></a> 
                         <!-- <button type="submit" class="btn btn-primary">Read More <span class="glyphicon glyphicon-chevron-right"></span></button> -->
                     </form>
                     <hr>
