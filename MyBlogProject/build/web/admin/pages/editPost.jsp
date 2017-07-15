@@ -94,11 +94,12 @@
                         <div class="row">
                             <%
                                 DB db = new DB();
-                                ResultSet rsPost = db.execute("select * from post order by post_id");
+                                ResultSet rsPost = db.execute("select * from category c inner join post p on c.category_id = p.category_id order by p.post_date desc;");
                             %>
                             <table id="mytable" class="table table-bordred table-striped" style="width: 100%">
                                 <thead>
                                 <th>Title</th>
+                                <th>Category</th>
                                 <th>Date</th>
                                 <th>Image</th>
                                 <th>Post</th>
@@ -107,12 +108,13 @@
                                 <tbody>
                                     <% while (rsPost.next()) {%>
                                     <tr>
-                                        <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(2)%>" readonly></td>
                                         <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(4)%>" readonly></td>
-                                        <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(5)%>" readonly></td>
+                                        <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(2)%>" readonly></td>
                                         <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(6)%>" readonly></td>
-                                        <td><input type="text" class="form-control" rec_comment="<%=rsPost.getString(7)%>" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(7)%>" readonly></td>
-                                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn_edit btn btn-primary btn-xs" rec_id="<%=rsPost.getString(1)%>" rec_title="<%=rsPost.getString(2)%>" rec_img="<%=rsPost.getString(5)%>" rec_post="<%=rsPost.getString(6)%>" data-title="Edit" data-toggle="modal" data-target="#edit" onclick="copyCategory()"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                                        <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(7)%>" readonly></td>
+                                        <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(8)%>" readonly></td>
+                                        <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(9)%>" readonly></td>
+                                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn_edit btn btn-primary btn-xs" rec_id="<%=rsPost.getString(3)%>" rec_title="<%=rsPost.getString(4)%>" rec_img="<%=rsPost.getString(7)%>" rec_post="<%=rsPost.getString(8)%>" data-title="Edit" data-toggle="modal" data-target="#edit" onclick="copyCategory()"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
                                         <td><p data-placement="top" data-toggle="tooltip" title="Delete"><a href="deletePost.jsp?del=<%=rsPost.getString(2)%>" class="btn btn-danger btn-xs" data-title="Delete"><span class="glyphicon glyphicon-trash"></span></a></p></td>
                                     </tr>
                                     <% }%>
