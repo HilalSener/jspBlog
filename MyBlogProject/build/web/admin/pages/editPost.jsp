@@ -94,7 +94,7 @@
                         <div class="row">
                             <%
                                 DB db = new DB();
-                                ResultSet rsPost = db.execute("select * from category c inner join post p on c.category_id = p.category_id order by p.post_date desc;");
+                                ResultSet rsPost = db.execute("select * from category c inner join post p on c.category_id = p.category_id order by p.post_date desc");
                             %>
                             <table id="mytable" class="table table-bordred table-striped" style="width: 100%">
                                 <thead>
