@@ -111,8 +111,8 @@
                                         <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(4)%>" readonly></td>
                                         <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(5)%>" readonly></td>
                                         <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(6)%>" readonly></td>
-                                        <td><input type="text" class="form-control" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(7)%>" readonly></td>
-                                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn_edit btn btn-primary btn-xs" rec_id="<%=rsPost.getString(1)%>" data-title="Edit" data-toggle="modal" data-target="#edit" onclick="copyCategory()"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                                        <td><input type="text" class="form-control" rec_comment="<%=rsPost.getString(7)%>" style="border: 0px;box-shadow: none;background-color: transparent" value="<%=rsPost.getString(7)%>" readonly></td>
+                                        <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn_edit btn btn-primary btn-xs" rec_id="<%=rsPost.getString(1)%>" rec_title="<%=rsPost.getString(2)%>" rec_img="<%=rsPost.getString(5)%>" rec_post="<%=rsPost.getString(6)%>" data-title="Edit" data-toggle="modal" data-target="#edit" onclick="copyCategory()"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
                                         <td><p data-placement="top" data-toggle="tooltip" title="Delete"><a href="deletePost.jsp?del=<%=rsPost.getString(2)%>" class="btn btn-danger btn-xs" data-title="Delete"><span class="glyphicon glyphicon-trash"></span></a></p></td>
                                     </tr>
                                     <% }%>
@@ -133,21 +133,36 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                        <h4 class="modal-title custom_align" id="Heading">Edit Your Category</h4>
+                        <h4 class="modal-title custom_align" id="Heading">Edit Your Blog Post</h4>
                     </div>
                     <form action="updatePost.jsp" method="get">
                         <div class="modal-body">
                             <div class="form-group">
-                                <input class="form-control" type="text" id="category_id2" name="post_id" readonly>
+                                <!-- Post id ekrandan gizlendi -->
+                                <input class="form-control" type="hidden" id="category_id2" name="post_id" readonly>
                             </div>
                             <div class="form-group">
-                                <input class="form-control " type="text" placeholder="Title" name="title">
+                                <label>Title</label>
+                                <input class="form-control " type="text" id="title" placeholder="Title" name="title">
+                            </div>
+                            <%
+                                ResultSet rsCategory = db.execute("select category_id, category from category order by category_id");
+                            %>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select class="form-control input" name="cat">
+                                    <% while (rsCategory.next()) {%>
+                                    <option value="<%=rsCategory.getString(1)%>"><%=rsCategory.getString(2)%></option>
+                                    <% }%>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <input class="form-control " type="text" placeholder="Image Url" name="imgUrl">
+                                <label>Image URL</label>
+                                <input class="form-control " id="img_url" type="text" placeholder="Image Url" name="imgUrl">
                             </div>
                             <div class="form-group">
-                                <textarea required class="form-control" placeholder="Blog Post" name="pText" rows="10"></textarea>
+                                <label>Blog Post</label>
+                                <textarea required class="form-control" id="post" placeholder="Blog Post" name="pText" rows="10"></textarea>
                             </div>
                             <div class="form-group">
                                 <div class="checkbox">
@@ -174,6 +189,17 @@
                 //alert('Secilen : '+id);
                 $("#category_id2").val(id);
 
+                var title = $(this).attr('rec_title');
+                //alert('Secilen : '+title);
+                $("#title").val(title);
+                
+                var img = $(this).attr('rec_img');
+                //alert('Secilen : '+img);
+                $("#img_url").val(img);
+                
+                var post = $(this).attr('rec_post');
+                //alert('Secilen : '+post);
+                $("#post").val(post);
             });
             function copyCategory()
             {
